@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Phambaonam_Bai1::css/style.css"/>
+    </head>
+     <!--refenrece dùng để update block-->
+    <referenceBlock name="content">
+
+
+        <!--để tạo(khai báo) block ta dùng <block>-->
+        <block class="Phambaonam\Bai1\Block\Weather" name="phambaonam_bai1" template="weather.phtml" />
+        <!--
+        class="Phambaonam\Bai1\Block\Weather"  : định nghĩa block nằm trong vendor/module nào
+        name="phambaonam_bai1" :  định nghĩa module chứa template
+        template="weather.phtml"  : đường dẫn tới template tương ứng trong thư mục template.
+        -->
+    </referenceBlock>
+</page>

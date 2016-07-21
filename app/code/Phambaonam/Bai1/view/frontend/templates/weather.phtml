@@ -1,0 +1,58 @@
+<h2 style="color:#fff; text-align:center;">Dự Báo Thời Tiết</h2>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<div id="weather">
+</div>
+
+<script>
+    require(['jquery', 'simple_weather'], function ($) {
+        $(document).ready(function () {
+
+            $.simpleWeather({
+
+                location: 'HaNoi, VN',
+                woeid: '',
+                unit: 'c',
+                success: function (weather) {
+                    //console.log(weather);
+                    html = '<div ><h2 class="city"> ' + weather.city + ', ' + weather.country + '</h2></div>';
+
+
+                    html += '<div><h2 class="date"> ' + weather.sunrise + ' - ' + weather.forecast[0].date + '</h2><div>';
+                    html += '<div class="today"><h2 class="text">' + weather.currently + '</h2>';
+                    html += '<h2 class="symbol"><i class="icon-' + weather.code + '"></i> ' + '</h2>';
+
+
+                    html += '<div class="updown"><h2 style="color:#fff" class=" icon-up fa fa-arrow-up"> ' + '</h2>';
+                    html += '<h2 style="color:#fff" class= "up"> ' + weather.high + '</h2>';
+                    html += '<h2 style="color:#fff"> ' + '&deg;' + '</h2>';
+                    html += '<h2 style="color:#fff" class=" icon-down fa fa-arrow-down"> ' + '</h2>';
+                    html += '<h2 style="color:#fff" class= "down"> ' + weather.low + '</h2>';
+                    html += '<h2 style="color:#fff"> ' + '&deg;' + '</h2></div>';
+
+                    html += '<div><div class="temp-wind"><h2 class = "celsius number"> ' + weather.temp + '&deg;' + '</h2>';
+                    html += '<h2 class = " celsius C "> ' + weather.units.temp + '</h2>';
+                    html += '<h2 class = " celsius wind " >' + weather.wind.speed + '<sup>' +' km/h ' +  '</sup>' + '</h2></div></div>';
+
+                    html += '<div><h2 style="color:#fff;">' + 'Thời tiết các ngày tiếp theo: ' + '</h2></div>';
+
+                    for (var i = 0; i < weather.forecast.length; i++) {
+                        html += '<div class="week"><div style="margin-top: 10px; width:100px;" class="left">' + weather.forecast[i].day + '</div>';
+                        html += '<div class="left"><i  style="font-size: 40px;margin-left:40px;" class="icon-' + weather.forecast[i].code + '"></i> ' + '</div>';
+                        html += '<div class="left" style="margin-top: 10px;"><p style="color:#fff;font-size: 15px;" class=" icon-up fa fa-arrow-up"> ' + '</p>';
+                        html += '<p style="color:#fff" class= "up"> ' + weather.forecast[i].high + '</p>';
+                        html += '<p style="color:#fff"> ' + '&deg;' + '</p>';
+                        html += '<p style="color:#fff;font-size: 15px;" class=" icon-down fa fa-arrow-down"> ' + '</p>';
+                        html += '<p style="color:#fff" class= "down"> ' + weather.forecast[i].low + '</p>';
+                        html += '<p style="color:#fff"> ' + '&deg;' + '</p></div>';
+                        html+='<br/></div>'
+                    }
+
+                    $("#weather").html(html);
+                },
+                error: function (error) {
+                    $("#weather").html('<p>' + error + '</p>');
+                }
+            });
+        });
+    });
+</script>
